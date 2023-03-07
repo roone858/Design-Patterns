@@ -1,0 +1,22 @@
+{
+  "name": "singleton-pattern",
+  "version": "1.0.0",
+  "description": "Share a single global instance throughout our application\r - Singletons are classes which can be instantiated once, and can be accessed globally.\r - This single instance can be shared throughout our application\r   - which makes Singletons great for managing global state in an application.",
+  "main": "index.js",
+  
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  }
+}
