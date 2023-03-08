@@ -156,3 +156,61 @@ Testing code that relies on a Singleton can get tricky Since :
  4.  and one small modification can lead to an entire test suite failing.
 
 **Note:**  After testing, we need to reset the entire instance in order to reset the modifications made by the tests.
+
+## Dependency hiding
+When importing another module,
+
+superCounter.js in this case, it may not be obvious that module is importing a Singleton.
+
+In other files, such as index.js in this case, we may be importing that module and invoke its methods.
+
+This way, we accidentally modify the values in the Singleton.
+   
+This can lead to unexpected behavior, since multiple instances of the Singleton can be shared throughout the application, which would all get modified as well.
+
+  ```javascript
+  import Counter from "./counter";
+
+export default class SuperCounter {
+  constructor() {
+    this.count = 0;
+  }
+
+  increment() {
+    Counter.increment();
+    return (this.count += 100);
+  }
+
+  decrement() {
+    Counter.decrement();
+    return (this.count -= 100);
+  }
+}
+
+  ```
+
+ ## Global behavior
+A Singleton instance should be able to get referenced throughout the entire app.
+
+ Global variables essentially show the same behavior:
+ -  since global variables are available on the global scope, we can access those variables throughout the application.
+
+
+- Having global variables is generally considered as a bad design decision.
+-  Global scope pollution can end up in accidentally overwriting the value of a global variable, which can lead to a lot of unexpected behavior.
+
+**In ES2015, creating global variables is fairly uncommon.**
+ The new `let` and `const` keyword **prevent developers from accidentally polluting the global scope** : 
+ -  by keeping variables declared with these two keywords block-scoped.
+ -   The new module system in JavaScript makes creating globally accessible values easier without polluting the global scope,
+ -    by being able to export values from a module, and import those values in other files.
+
+However, the common uncase for a Singleton is to have some sort of global state throughout your application.
+
+ Having multiple parts of your codebase rely on the same mutable object can lead to unexpected behavior.
+
+Usually, certain parts of the codebase modify the values within global state, whereas others consume that data.
+
+ The order of execution here is important:
+ 1.  we don't want to accidentally consume data first, when there is no data to consume (yet)! 
+ 2.  Understanding the data flow when using a global state can get very tricky as your application grows, and dozens of components rely on each other

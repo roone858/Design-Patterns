@@ -1,3 +1,5 @@
 node_modules
 dist
 .parcel-cache
+test copy.drawio
+test.drawio
