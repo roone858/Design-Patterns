@@ -214,3 +214,5 @@ Usually, certain parts of the codebase modify the values within global state, wh
  The order of execution here is important:
  1.  we don't want to accidentally consume data first, when there is no data to consume (yet)! 
  2.  Understanding the data flow when using a global state can get very tricky as your application grows, and dozens of components rely on each other
+
+--- 
