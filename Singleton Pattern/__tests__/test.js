@@ -12,6 +12,7 @@ test("incrementing 3 extra times should be 4", () => {
   expect(Counter.getCount()).toBe(4);
 });
 
+
 test("decrementing 1  times should be 3", () => {
   Counter.decrement();
   expect(Counter.getCount()).toBe(3);
